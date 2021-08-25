@@ -1,0 +1,57 @@
+
+\graphicspath{{./chap3/images/}} 
+\chapter{Command}
+\textbf{이 장은 기본 리눅스 명령어를 다룬다.}
+\section{파일 관리}
+\subsection{절대경로와 상대경로}
+절대경로는 /home/gs19000/dir1/dir2와 같은 것이다. 상대경로는 현재 내 위치에서 시작하는 경로다. 즉, 내가 지금 /home/gs19000/dir1에 있다면 여기서 /home/gs19000/dir1/dir2의 상대경로는 그냥 dir2다.
+\subsection{디렉토리 및 탐색}
+cd 명령어를 사용해서 디렉터리를 탐색할 수 있다. \\ ..은 상위 디렉토리, -은 이전 디렉토리, $\sim$는 홈 디렉토리를 의미한다.
+cd (디렉토리)라 치면 해당 디렉토리로 이동된다. 디렉토리를 표현할 때 절대경로, 상대경로 둘 다 가능하며, 실행시 주소쪽 값이 변경된다.
+\begin{lstlisting}
+    $ cd dir1 입력시
+    ~/dir1$ __으로 바뀐다.
+    $ cd /home/gs19000/dir1 
+    $ cd ..
+    $ cd -
+    $ cd ~
+\end{lstlisting}
+\subsection{디렉토리 및 파일 관리}
+rm 명령어를 사용해서 파일을 삭제할 수 있다. rm (file) : 해당 파일을 삭제한다. rm -r (dir) : 해당 디렉토리를 삭제한다.
+또한, mkdir 명령어를 사용해서 디렉터리를 만들 수 있다. mkdir (dir) : 해당 이름의 디렉토리가 존재하지 않을 경우 새로 dir이름의 디렉터리를 생성한다. 다음으로 cp, mv 명령어를 통해 파일을 옯기거나 복사할 수 있다. cp (file1) (file2) : file1의 이름을 file2 이름으로 바꾸어 복사한다.(file1은 삭제되지 않음 file2가 이미 존재할 경우 덮어씌워진다) cp -r (dir1) (dir2) : dir1이름의 디렉토리를 dir2 디렉토리 내부에 복사한다.(dir1은 반드시 존재해야 하며 dir2는 존재하지 않을 경우 새로 만들어진다) mv (file1) (file2) : file1의 이름을 file2로 바꾼다.(file2가 이미 존재할 경우 덮어씌워진다) mv (dir1) (dir2) : dir1의 이름을 dir2로 바꾼다.(dir1은 반드시 존재해야 하며 dir2가 존재할 경우 dir2 내부에 dir1 파일을 이동시킨다.) 마지막으로, cat을 이용해 내용을 읽어올 수 있다. cat (file1) : file1의 내용을 불러온다.
+    \begin{lstlisting}
+    $ rm file1
+    $ rm -r dir1
+    $ mkdir dir2
+    $ cp file1 file2
+    $ cp -r dir1 dir2
+    $ mv file1 file2
+    $ mv dir1 dir2
+    $ cat file3.txt
+    \end{lstlisting}
+\section{기타 기능}
+\subsection{프로세스 관리}
+htop을 이용해 실행중인 프로세스를 확인할 수 있다. kill, pkill을 통해 프로세스를 제거할 수 있다.
+    \begin{lstlisting}
+    $ htop
+    $ kill -9 <pid>
+    \end{lstlisting}
+\subsection{권한 관리}
+chmod를 이용해 권한을 관리할 수 있다. 권한에 대한 자세한 정보는 ...
+    \begin{lstlisting}
+    $ sudo chmod 777 file1
+    \end{lstlisting}
+\subsection{Vim}
+기본 메모장과 같다. i를 눌러 편집 모드에 들어갈 수 있으며 esc로 나올 수 있다. :w를 이용해 저장할 수 있고, :q를 이용해 종료할 수 있다. 
+\subsection{Pipeline}
+파이프라인을 통해 출력값에서 원하는 문자열을 확인할 수 있다. 보통 아래와 같이 |와 grep을 이용해 사용한다. 아래의 경우 file2.txt를 출력하는데, 그중 "abc"가 포함된 부분을 찾는 것이다.
+    \begin{lstlisting}
+    $ cat file2.txt | grep abc
+    \end{lstlisting}
+\subsection{유저 관리}
+adduser를 이용해 유저를 생성할 수 있다. usermod를 이용해 유저의 그룹을 관리할 수 있다. su를 이용해 사용자를 바꿀 수 있다.
+    \begin{lstlisting}
+    $ adduser gs21000
+    $ usermod -aG GROUP gs21000
+    $ su gs20000
+    \end{lstlisting}
